@@ -6,8 +6,9 @@
 
 \usepackage{xspace}
 \usepackage{ulem}
+\usepackage{qtree}
 \usepackage{graphicx}
-\graphicspath{{images}}
+\graphicspath{{images/}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -234,25 +235,92 @@
 \newcommand{\Funid}[1]{\textcolor{Blue}{#1}}
 \newcommand{\Typeid}[1]{\textcolor{Purple}{#1}}
 
-\begin{xframe}{}
+\begin{xframe}{Arithmetic expressions}
+  \hfill
+  \begin{minipage}{0.4\linewidth}
+    \begin{center}
+      $((5 + 7) + (6 + 1)) + 2$
+    \end{center}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.4\linewidth}
+    \begin{center}
+      \Tree [.$+$ [.$+$ [.$+$ 5 7 ] [.$+$ 6 1 ] ] 2 ]
+    \end{center}
+  \end{minipage}
+  \hfill
+\end{xframe}
 
+\begin{xframe}{Representing expressions}
 \begin{code}
 data Expr where
   Lit  ::  Int -> Expr
   Add  ::  Expr -> Expr -> Expr
 \end{code}
 
-Illustrate expression as tree and as Haskell code
-
+  \hfill
+  \begin{minipage}{0.2\linewidth}
+    \begin{center}
+      \Tree [.$+$ [.$+$ [.$+$ 5 7 ] [.$+$ 6 1 ] ] 2 ]
+    \end{center}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.6\linewidth}
+\begin{code}
+expr1 :: Expr
+expr1 =
+  Add
+    (Add
+      (Add (Lit 5) (Lit 7))
+      (Add (Lit 6) (Lit 1)))
+    (Lit 2)
+\end{code}
+  \end{minipage}
+  \hfill
 \end{xframe}
 
-\begin{xframe}
+\begin{xframe}{Evaluating expressions}
+\begin{spec}
+data Expr where
+  Lit  ::  Int -> Expr
+  Add  ::  Expr -> Expr -> Expr
+\end{spec}
+
 \begin{code}
 eval :: Expr      ->  Int
 eval (Lit x)      =   x
 eval (Add e1 e2)  =   eval e1 + eval e2
 \end{code}
 
+\begin{verbatim}
+ghci> eval expr1
+21
+\end{verbatim}
+\end{xframe}
+
+\begin{xframe}{Problems}
+  \begin{itemize}
+  \item Can't pause in the middle of evaluation
+    \begin{itemize}
+    \item Prompt the user to continue or quit
+    \item Let other robots have a turn to run
+    \end{itemize}
+  \item Hard to add other language features (e.g. exceptions)
+  \end{itemize}
+\end{xframe}
+
+\begin{xframe}{}
+  \begin{center}
+    \huge{Can we evaluate without recursion?}
+  \end{center}
+\end{xframe}
+
+\begin{xframe}{}
+  At each point during the recursion, we have:
+  \begin{itemize}
+  \item A current subexpression we are focusing on
+  \item A stack of things we're waiting to do once we finish
+  \end{itemize}
 \end{xframe}
 
 \end{document}
