@@ -1,0 +1,13 @@
+*~
+.shake/
+TAGS
+*.aux
+*.log
+*.nav
+*.out
+*.pdf
+*.ptb
+*.snm
+*.tex
+*.toc
+*.vrb

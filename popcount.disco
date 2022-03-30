@@ -1,0 +1,15 @@
+||| popcount(n) computes the number of 1s in the binary
+||| representation of n.
+
+!!! popcount(0) == 0
+!!! popcount(5) == 2
+!!! popcount(64) == 1
+!!! exists x:N. popcount(x) == 4
+!!! forall n:N. popcount(n) <= n
+!!! forall m:N. popcount(m) >= m
+!!! exists x:N. popcount(x) == 99
+
+popcount : N -> N
+popcount(0) = 0
+popcount(2n+1) = 1 + popcount(n)
+popcount(2n) = popcount(n)
