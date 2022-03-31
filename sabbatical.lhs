@@ -158,12 +158,14 @@
 
 \begin{xframe}{What is it?}
   \begin{itemize}
-  \item Functional programming language for teaching Discrete Math
+  \item Functional programming language for \sout{annoying Discrete
+      Math students} teaching Discrete Math
   \item Mathematical syntax
   \item Implemented in Haskell
   \item Goals:
     \begin{itemize}
-    \item Expose students to a little bit of functional programming
+    \item Expose students to some typed functional programming
+      concepts
     \item Provide a computational platform for playing with
       mathematical concepts
     \end{itemize}
@@ -196,7 +198,7 @@
 
 \begin{xframe}{What did I work on?}
   \begin{itemize}
-  \item Language design as game design
+  \item Language design + game design
   \item Building an open-source community
   \end{itemize}
 \end{xframe}
@@ -210,15 +212,15 @@
 \begin{xframe}{What do Disco and Swarm have in common?}
   \begin{itemize}
   \item Both are custom programming languages (I can't resist)
-  \item CE(S)K machines!
+  \item CESK machines!
   \end{itemize}
   \begin{center}
     \includegraphics[width=1in]{PFPL}
   \end{center}
 \end{xframe}
 
-% \renewcommand{\sectionimg}{???}
-\section{Section Title??}
+\renewcommand{\sectionimg}{machine.png}
+\section{C(ES)K machines}
 
 %if False
 \begin{code}
@@ -316,11 +318,50 @@ ghci> eval expr1
 \end{xframe}
 
 \begin{xframe}{}
+  \Tree [.$+$ [.$+$ [.$+$ 5 7 ] [.$+$ 6 1 ] ] 2 ]
+  \bigskip
+
   At each point during the recursion, we have:
   \begin{itemize}
   \item A current subexpression we are focusing on
   \item A stack of things we're waiting to do once we finish
   \end{itemize}
+\end{xframe}
+
+\begin{xframe}{The big idea}
+  \begin{itemize}
+  \item Record this state (current subexpression + ``continuation''
+    stack)
+  \item Write a function to step from one state to the next, guided by
+    thinking about what the recursive |eval| function does.
+  \end{itemize}
+\end{xframe}
+
+\begin{xframe}{}
+  \begin{center}
+    \Huge{Livecoding!}
+  \end{center}
+\end{xframe}
+
+\begin{xframe}{}
+  \begin{itemize}
+  \item We have seen a CK machine (C = Control, K = Kontinuation)
+  \item A CEK machine adds an Environment to keep track of variable definitions
+  \item A CESK machine adds a Store to keep track of mutable state
+  \item Both Swarm and Disco use CESK machines!
+    \begin{itemize}
+    \item Swarm: pause the game, run many robots in parallel,
+      save/load robot states, exceptions with try/catch, etc.
+    \item Disco: ?
+    \end{itemize}
+  \end{itemize}
+\end{xframe}
+
+\begin{xframe}{}
+  \begin{center}
+    {\large If you find this stuff fun/interesting, take CSCI 360 Programming
+    Languages in Spring 2023!}
+  \end{center}
 \end{xframe}
 
 \end{document}
